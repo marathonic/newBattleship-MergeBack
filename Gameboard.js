@@ -8,7 +8,8 @@ export function Gameboard() {
       let coordinates = coordies;
       // <-- register [{destroyer: 'A7'}, {anotherShip: 'coordinates'}, {etc...}];
       let obj = {};
-      obj[ship.getName()] = coordinates;
+      obj.ship = ship.getName();
+      obj.positions = coordinates;
       shipsHere.push(obj); // <-- store each {ship:coord} inside [shipsHere];
       // if (shipsHere.length < 1) shipsHere.push({});
       return { ship, coordinates, shipsHere };
@@ -16,8 +17,16 @@ export function Gameboard() {
     shipsPls() {
       return shipsHere;
     },
-    // receiveAttack(...coordinates) {
-    //   if(shipsHere.some(e => e))
-    // },
+    receiveAttack(coordinates) {
+      try {
+        if (shipsHere.some((e) => e.positions.includes(coordinates))) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (err) {
+        return err;
+      }
+    },
   };
 }
