@@ -2,9 +2,10 @@ import { Ship } from "./Ship";
 
 export function Gameboard() {
   let shipsHere = [];
+  let ship;
   return {
     placeShip(shipModel, ...coordies) {
-      let ship = Ship(shipModel);
+      ship = Ship(shipModel);
       let coordinates = coordies;
       // <-- register [{destroyer: 'A7'}, {anotherShip: 'coordinates'}, {etc...}];
       let obj = {};
@@ -20,7 +21,7 @@ export function Gameboard() {
     receiveAttack(coordinates) {
       try {
         if (shipsHere.some((e) => e.positions.includes(coordinates))) {
-          return true;
+          if (ship.hit(coordinates)) return ship.getLength();
         } else {
           return false;
         }

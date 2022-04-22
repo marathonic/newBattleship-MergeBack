@@ -45,7 +45,10 @@ export function Ship(shipType) {
       //<-- why would we need to know where it's been attacked before?
       // We should handle the 'cannot attack spot twice' functionality from the board
       hits++;
+      length--;
       previouslyHit.push(position); //<- where has this ship been hit before?
+      return true;
+      // return `${position} added to previouslyHit array`;
     },
     isSunk() {
       hits >= length ? true : false;
